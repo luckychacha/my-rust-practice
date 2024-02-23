@@ -1,4 +1,4 @@
-use sha2::{Digest, Sha256, Sha512};
+use sha2::{Digest, Sha256};
 use hex_literal::hex;
 fn main() {
     let hash = Sha256::digest(b"Hello, world!");
