@@ -12,3 +12,33 @@ pub fn public_hash_function(public_key: &[u8]) -> Vec<u8> {
     let hash160: [u8; 20] = hasher.try_into().expect("Wrong length");
     hash160.to_vec()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use hex_literal::hex;
+    use hex::FromHex;
+
+    #[test]
+    fn test_from_sha256_to_ripemd160() {
+        // hex! is a macro that converts a string literal to a byte array
+        // so we can not use hex! to deal a parameter, we should use hex::FromHex.
+        let _sha256 = "85ae273f0aa730eddf2285d3f3ab071eb29caba1e428db90e6dfbd71b8e1e918";
+        let _ripemd160 = "5f2613791b36f667fdb8e95608b55e3df4c5f9eb";
+        let hasher = Ripemd160::digest(hex!("85ae273f0aa730eddf2285d3f3ab071eb29caba1e428db90e6dfbd71b8e1e918"));
+        let l: [u8; 20] = hasher.try_into().expect("Wrong length");
+        let r = hex!("5f2613791b36f667fdb8e95608b55e3df4c5f9eb");
+        assert_eq!(l ,r);
+    }
+
+    #[test]
+    fn test_from_sha256_to_ripemd160_use_hex() {
+        // We can use hex::FromHex to deal a parameter.
+        let sha256 = "85ae273f0aa730eddf2285d3f3ab071eb29caba1e428db90e6dfbd71b8e1e918";
+        let ripemd160 = "5f2613791b36f667fdb8e95608b55e3df4c5f9eb";
+        let hasher = Ripemd160::digest(Vec::<u8>::from_hex(sha256).expect("Decoding failed"));
+        let l: [u8; 20] = hasher.try_into().expect("Wrong length");
+        let r = Vec::<u8>::from_hex(ripemd160).expect("Decoding failed");
+        assert_eq!(l ,r.as_slice());
+    }
+}
