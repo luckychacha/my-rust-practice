@@ -3,6 +3,16 @@
 version = 3
 
 [[package]]
+name = "bitcoin"
+version = "0.1.0"
+dependencies = [
+ "hex",
+ "hex-literal",
+ "ripemd",
+ "sha2",
+]
+
+[[package]]
 name = "block-buffer"
 version = "0.10.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -73,16 +83,6 @@ name = "libc"
 version = "0.2.153"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c198f91728a82281a64e1f4f9eeb25d82cb32a5de251c6bd1b5154d63a8e7bd"
-
-[[package]]
-name = "my-rust-practice"
-version = "0.1.0"
-dependencies = [
- "hex",
- "hex-literal",
- "ripemd",
- "sha2",
-]
 
 [[package]]
 name = "ripemd"
