@@ -21,10 +21,10 @@ impl Mnemonic<'_> {
 	}
 
 	// Derive the seed from the mnemonic
-	pub fn to_seed(&self) -> Vec<u8> {
+	pub fn to_seed(&self) -> [u8; PBKDF2_BYTES] {
 		let mnemonic = self.mnemonic.as_bytes();
 		let salt = format!("mnemonic{}", self.password.unwrap_or(""));
-		let mut seed = vec![0u8; PBKDF2_BYTES];
+		let mut seed = [0u8; PBKDF2_BYTES];
 		pbkdf2::pbkdf2::<Hmac<Sha512>>(mnemonic, salt.as_bytes(), PBKDF2_ROUNDS, &mut seed)
 			.expect("HMAC can not be initialized with any key length");
 		seed
