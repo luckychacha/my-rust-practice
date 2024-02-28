@@ -15,7 +15,6 @@ pub fn public_hash_function(public_key: &[u8]) -> [u8; 20] {
 	res
 }
 
-
 #[cfg(test)]
 mod tests {
 	use super::*;
