@@ -1,5 +1,6 @@
 use ripemd::Ripemd160;
 use sha2::{Digest, Sha256};
+pub mod mnemonic;
 
 // public hash function
 // input: public key
@@ -13,6 +14,7 @@ pub fn public_hash_function(public_key: &[u8]) -> [u8; 20] {
 	// res.to_vec()
 	res
 }
+
 
 #[cfg(test)]
 mod tests {
