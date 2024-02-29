@@ -31,29 +31,29 @@ impl Mnemonic<'_> {
 	}
 }
 
-// todo: 
+// todo:
 // 1. Move it into a new module called entropy
 // 2. Add a function to generate a random mnemonic
 // 3. Add test case to test from entropy to mnemonic and from mnemonic to entropy
 pub fn get_checksum(input: &str) -> String {
 	// Convert input to bytes
 	let input = hex::decode(input).unwrap();
-	
+
 	let mut hasher = Sha256::new();
 	hasher.update(input);
 	let result = hasher.finalize();
 	// 将结果转换为十六进制字符串
-    let hashed_hex = hex::encode(result);
+	let hashed_hex = hex::encode(result);
 	println!("Hashed hex: {}", hashed_hex);
 	// 获取哈希值的第一个字节
-    let first_byte = result[0];
+	let first_byte = result[0];
 
-    // 将第一个字节的前4位转换为二进制字符串
-    let first_4_bits = format!("{:b}", first_byte >> 4);
+	// 将第一个字节的前4位转换为二进制字符串
+	let first_4_bits = format!("{:b}", first_byte >> 4);
 
-    // 打印前4位二进制数
-    println!("First 4 bits: {}", first_4_bits);
-	
+	// 打印前4位二进制数
+	println!("First 4 bits: {}", first_4_bits);
+
 	first_4_bits
 }
 
