@@ -31,6 +31,10 @@ impl Mnemonic<'_> {
 	}
 }
 
+// todo: 
+// 1. Move it into a new module called entropy
+// 2. Add a function to generate a random mnemonic
+// 3. Add test case to test from entropy to mnemonic and from mnemonic to entropy
 pub fn get_checksum(input: &str) -> String {
 	// Convert input to bytes
 	let input = hex::decode(input).unwrap();
