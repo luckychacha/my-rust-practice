@@ -45,4 +45,13 @@ mod tests {
 		let r = Vec::<u8>::from_hex(ripemd160).expect("Decoding failed");
 		assert_eq!(l, r.as_slice());
 	}
+
+	#[test]
+	fn test_sha256() {
+		// ❯ echo "2007.  He said about a year and a half before Oct 2008" | sha256sum
+		// 94d7a772612c8f2f2ec609d41f5bd3d04a5aa1dfe3582f04af517d396a302e4e  -
+		let raw = "2007.  He said about a year and a half before Oct 2008\n";
+		let digest = Sha256::digest(raw.as_bytes());
+		assert_eq!("94d7a772612c8f2f2ec609d41f5bd3d04a5aa1dfe3582f04af517d396a302e4e", hex::encode(digest));
+	}
 }
