@@ -15,6 +15,24 @@ pub fn public_hash_function(public_key: &[u8]) -> [u8; 20] {
 	res
 }
 
+pub fn base58_check_encode(payload: &[u8]) -> String {
+	let mut payload = payload.to_vec();
+	payload.extend(&checksum(&payload));
+	encode_base58(&payload)
+}
+
+pub fn checksum(payload: &[u8]) -> [u8; 4] {
+	let first_hash = Sha256::digest(payload);
+	let second_hash = Sha256::digest(&first_hash);
+	let mut res: [u8; 4] = Default::default();
+	res.copy_from_slice(&second_hash[..4]);
+	res
+}
+
+pub fn encode_base58(input: &[u8]) -> String {
+	todo!()
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
