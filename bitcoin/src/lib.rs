@@ -1,3 +1,5 @@
+#![allow(unused_variables)]
+
 use ripemd::Ripemd160;
 use sha2::{Digest, Sha256};
 pub mod mnemonic;
@@ -28,8 +30,8 @@ pub fn checksum(payload: &[u8]) -> [u8; 4] {
 	res.copy_from_slice(&second_hash[..4]);
 	res
 }
-
 pub fn encode_base58(input: &[u8]) -> String {
+	let alphabet = b"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 	todo!()
 }
 
