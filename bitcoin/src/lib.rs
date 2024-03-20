@@ -32,7 +32,21 @@ pub fn checksum(payload: &[u8]) -> [u8; 4] {
 }
 pub fn encode_base58(input: &[u8]) -> String {
 	let alphabet = b"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-	todo!()
+	let mut input = input.to_vec();
+	let mut res = vec![];
+	while !input.is_empty() {
+		let mut quotient = vec![];
+		let mut remainder = 0;
+		for &i in input.iter() {
+			let temp = i as u16 + remainder * 256;
+			remainder = temp % 58;
+			quotient.push((temp / 58) as u8);
+		}
+		res.push(alphabet[remainder as usize]);
+		input = quotient.into_iter().skip_while(|&x| x == 0).collect();
+	}
+	let prefix = input.iter().take_while(|&&x| x == 0).map(|_| alphabet[0]).collect::<Vec<_>>();
+	prefix.iter().chain(res.iter()).map(|&x| x as char).collect()
 }
 
 #[cfg(test)]
