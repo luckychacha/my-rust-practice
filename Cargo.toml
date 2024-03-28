@@ -1,7 +1,8 @@
 [workspace]
 members = [
     "bitcoin",
-    "merkle-tree"
+    "common",
+    "merkle-tree",
 ]
 resolver = "2"
 
